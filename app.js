@@ -1,28 +1,23 @@
-// const inputElem = document.querySelector('input');
-// const buttonElem = document.querySelector('button');
-// const ulElem = document.querySelector('ul');
-
-// function addGoal() {
-//     const inputValue = inputElem.value;
-//     const listItem = document.createElement('li');
-//     listItem.textContent = inputValue;
-//     ulElem.appendChild(listItem);
-//     inputElem.value = '';
-// }
-
-// buttonElem.addEventListener('click', addGoal);
-
-Vue.createApp({
+const app = Vue.createApp({
     data() {
         return {
-            goals: [],
-            enteredValue: ''
-        };
+            courseGoal: 'Will be the Best!',
+            courseGoalA: 'Finish the course.',
+            courseGoalB: 'Make amazing App.',
+            courseLink: 'https:vagtec.com.ua'
+        }
     },
+
     methods: {
-        addGoal() {
-            this.goals.push(this.enteredValue);
-            this.enteredValue = '';
+        mathRandom() {
+            const mathRandom = Math.random();
+            if (mathRandom < 0.5) {
+                return this.courseGoalA
+            } else {
+                return this.courseGoalB
+            }
         }
     }
-}).mount('#app');
+});
+
+app.mount('#user-goal');
