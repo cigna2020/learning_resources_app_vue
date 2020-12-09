@@ -12,21 +12,21 @@
 </head>
 
 <body>
-    <section id="assignment">
-        <!-- 1) Output your name -->
-        <h2>{{ userName }}</h2>
-        <!-- 2) Output your age -->
-        <p>{{ userAge }}</p>
-        <!-- 3) Output your age + 5 -->
-        <p>{{ userAgeAdd5() }}</p>
-        <!-- 4) Output a random number (0 to 1) -->
-        <p>{{ randomNumber() }}</p>
-        <div>
-            <!-- 5) Display some image you found via Google -->
-            <img v-bind:src="imageLink" />
-        </div>
-        <!-- 6) Prepopulate the input field with your name via the "value" attribute -->
-        <input type="text" v-bind:value="userName" />
+    <header>
+        <h1>Vue Events</h1>
+    </header>
+    <section id="events">
+        <h2>Events in Action</h2>
+        <button v-on:click="add(5)">Add</button>
+        <button v-on:click.middle="reduce(5)">Reduce</button>
+        <p>Result: {{ counter }}</p>
+        <input type="text" v-on:input="changeName('Tsyh')">
+        <!-- <input type="text" v-on:keyup.enter="confirmedText($event, 'Tsyh')"> -->
+        <p>Your name: {{ name }}</p>
+        <form v-on:submit.prevent="submitForm">
+            <input type="text">
+            <button>Sign Up</button>
+        </form>
     </section>
 </body>
 
