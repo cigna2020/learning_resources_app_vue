@@ -1,23 +1,22 @@
 const app = Vue.createApp({
     data() {
         return {
-            courseGoal: 'Will be the Best!',
-            courseGoalA: 'Finish the course.',
-            courseGoalB: 'Make amazing App.',
-            courseLink: 'https:vagtec.com.ua'
+            userName: 'Alexander Tsyh',
+            userAge: '37',
+            imageLink: 'https://isha.sadhguru.org/blog/wp-content/uploads/2016/05/natures-temples.jpg'
         }
     },
-
     methods: {
-        mathRandom() {
-            const mathRandom = Math.random();
-            if (mathRandom < 0.5) {
-                return this.courseGoalA
-            } else {
-                return this.courseGoalB
-            }
+        userAgeAdd5() {
+            const toNumber = Number.parseInt(this.userAge);
+            const userAgeAdd5 = toNumber + 5;
+            return userAgeAdd5;
+        },
+        randomNumber() {
+            randomNumber = Math.random();
+            return Math.round(randomNumber);
         }
     }
 });
 
-app.mount('#user-goal');
+app.mount('#assignment');
