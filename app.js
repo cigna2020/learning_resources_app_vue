@@ -17,6 +17,12 @@ const app = Vue.createApp({
                 this.boxC = !this.boxC;
             }
         }
+    },
+
+    computed: {
+        boxCClasses() {
+            return {active: this.boxC};
+        }
     }
 });
 
