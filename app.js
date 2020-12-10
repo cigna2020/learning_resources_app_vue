@@ -1,22 +1,41 @@
 const app = Vue.createApp({
     data() {
         return {
-            showAlertText: '',
-            showAlertTextEnter: ''
+            counter: 0,
+            name: ''
+        };
+    },
+    computed: {
+        fullName() {
+            console.log('Running again...');
+            if (this.name === '') {
+                return '';
+            }
+            return this.name + ' ' + 'Tsyg';
         }
     },
-
     methods: {
-        showAlert() {
-            alert('It should be some text here!');
+        outputFullname() {
+            console.log('Running again...');
+            if (this.name === '') {
+                return '';
+            }
+            return this.name + ' ' + 'Tsyg';
         },
-        keyDown(event) {
-            this.showAlertText = event.target.value;
+        setName(event, lastName) {
+            this.name = event.target.value + ' ' + lastName;
         },
-        keyDownEnter(event) {
-            this.showAlertTextEnter = event.target.value;
+        add(num) {
+            this.counter = this.counter + num;
+        },
+        reduce(num) {
+            this.counter = this.counter - num;
+            // this.counter--;
+        },
+        resetName(event) {
+            this.name = '';
         }
     }
 });
 
-app.mount('#assignment')
+app.mount('#events');
