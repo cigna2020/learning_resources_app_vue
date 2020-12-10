@@ -1,63 +1,44 @@
 const app = Vue.createApp({
     data() {
         return {
-            counter: 0,
-            name: '',
-            fullname: ''
-        };
+            result: 0,
+            number: 37,
+            message: '',
+            messageNotYet: 'Not there yet',
+            messageTooMuch: 'Too much!'
+        }
+    },
+    methods: {
+        addNumber(num) {
+            this.result += num;
+        }
     },
     computed: {
-        fullName() {
-            console.log('Running again...');
-            if (this.name === '') {
-                return '';
+        checker() {
+            if (this.result === 0) {
+                return "It's time to start!";
             }
-            return this.name + ' ' + this.fullname;
-        },
-        secondName() {
-            if (fullname === '') {
-                return '';
+            if (this.result < this.number) {
+                return this.messageNotYet;
             }
-            return this.fullname;
-        },
-    },
-
-    watch: {
-        name(value) {
-            this.name = value;
-            console.log('Watch!')
-        },
-
-        counter(value) {
-            if (value > 50) {
-                this.counter = 0;
+            if (this.result > this.number) {
+                return this.messageTooMuch
+            }
+            if (this.result == this.number) {
+                return "Exactly!"
             }
         }
     },
-
-    methods: {
-        outputFullname() {
-            console.log('Running again...');
-            if (this.name === '') {
-                return '';
-            }
-            return this.name + ' ' + 'Tsyg';
-        },
-        setName(event, lastName) {
-            this.name = event.target.value + ' ' + lastName;
-        },
-        add(num) {
-            this.counter = this.counter + num;
-        },
-        reduce(num) {
-            this.counter = this.counter - num;
-            // this.counter--;
-        },
-        resetName(event) {
-            this.name = '';
-            this.fullname = '';
+    watch: {
+        result(value) {
+            const that = this;
+            function resetResult() {
+                that.result = 0
+            };
+            setTimeout(resetResult, 2000)
         }
     }
+
 });
 
-app.mount('#events');
+app.mount('#assignment');
