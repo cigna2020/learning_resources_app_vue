@@ -1,29 +1,44 @@
 const app = Vue.createApp({
     data() {
         return {
-            boxA: false,
-            boxB: false,
-            boxC: false,
+            name: '',
+            visible: true,
         }
     },
-
     methods: {
-        selectedBox(box) {
-            if (box == 'A') {
-                this.boxA = !this.boxA;
-            } else if (box == 'B') {
-                this.boxB = !this.boxB;
-            } else if (box == 'C') {
-                this.boxC = !this.boxC;
+        changeName() {
+            this.name = event.target.value;
+        },
+        toggleVisible() {
+            if (!this.visible) {
+                console.log('false');
+                this.visible = true;
+                return 'hidden';
+            } if (this.visible) {
+                console.log('true');
+                this.visible = false;
+                return 'visible';
             }
         }
-    },
 
+
+    },
     computed: {
-        boxCClasses() {
-            return {active: this.boxC};
+        userClass() {
+            if (this.name == 'user1') {
+                return 'user1'
+            } if (this.name == 'user2') {
+                return 'user2'
+            }
+        },
+        toggleClass() {
+            if (this.visible) {
+                return 'hidden';
+            } else {
+                return 'visible';
+            }
         }
     }
 });
 
-app.mount('#styling');
+app.mount('#assignment');
