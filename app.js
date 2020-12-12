@@ -3,6 +3,7 @@ const app = Vue.createApp({
         return {
             name: '',
             visible: true,
+            newBackgroundColor: '',
         }
     },
     methods: {
@@ -19,8 +20,11 @@ const app = Vue.createApp({
                 this.visible = false;
                 return 'visible';
             }
+        },
+        changeBGC() {
+            this.newBackgroundColor = event.target.value;
+            return this.newBackgroundColor;
         }
-
 
     },
     computed: {
@@ -37,7 +41,8 @@ const app = Vue.createApp({
             } else {
                 return 'visible';
             }
-        }
+        },
+
     }
 });
 
