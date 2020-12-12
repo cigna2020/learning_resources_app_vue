@@ -13,23 +13,21 @@
 
 <body>
     <header>
-        <h1>Vue Course Goals</h1>
+        <h1>Vue Lists and Conditional Content</h1>
     </header>
-    <section id="user-goals">
-        <h2>My course goals</h2>
-        <input type="text" v-model="enteredGoal" />
-        <button @click="addGoal">Add Goal</button>
-        <!-- <p v-show="goals.length === 0">No goals have been added yet - please start adding some!</p> -->
-        <p v-if="goals.length === 0">No goals have been added yet - please start adding some!</p>
-        <ul v-else>
-            <!-- <ul v-if="goals.length > 0"> -->
-            <li v-for="(goal, index) in goals" v-bind:key="goal" @click="removeGoal(index)"> {{ goal }}
-                <p><input type="text" @click.stop></p>
-            </li>
-            <!-- <li v-for="(goal, index) in goals"> {{ goal }} - {{ index + 1}}</li> -->
-            <!-- <li v-for="value in {name: 'Alex', age: '37'}">{{ value }}</li> -->
-            <!-- <li v-for="num in 10">{{ num }}</li> -->
+    <section id="assignment">
+        <h2>Assignment</h2>
+        <!-- 1) Add code to manage a list of tasks in a Vue app -->
+        <!-- When clicking "Add Task" a new task with the entered text should be added -->
+        <input type="text" v-model="newTask">
+        <button @click="addTask">Add Task</button>
+        <ul v-if="show">
+            <!-- 2) Output the list of tasks here -->
+            <li v-for="task in tasks">{{ task }}</li>
         </ul>
+        <!-- 3) When the below button is pressed, the list should be shown or hidden -->
+        <!-- BONUS: Also update the button caption -->
+        <button v-if="tasks.length > 0" @click="toggleList">{{ buttonText }}</button>
     </section>
 </body>
 
