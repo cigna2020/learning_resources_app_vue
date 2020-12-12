@@ -13,27 +13,18 @@
 
 <body>
     <header>
-        <h1>Vue Styling</h1>
+        <h1>Vue Course Goals</h1>
     </header>
-    <section id="assignment">
-        <!-- 1) Fetch the user input and use it as a CSS class -->
-        <!-- The entered class should be added to the below paragraph -->
-        <input type="text" v-model="name" />
-        <!-- (available classes: "user1", "user2") -->
-        Style me!
-        <!-- <p :class="name"> -->
-        <p :class="{user1: name === 'user1', user2: name === 'user2'}">
-            Style me! {{ name }}
-        </p>
-        <button @click="toggleVisible">Toggle Paragraph</button>
-        <!-- 2) Use the " visible" and "hidden" classes to show/ hide the above paragraph -->
-        <!-- Clicking the button should toggle between the two options -->
-
-        <!-- 3) Add dynamic inline styling to the below paragraph and let the user enter a background-color -->
-        <!-- <input type="text" @keydown.enter="changeBGC" /> -->
-        <input type="text" v-model="inputStyle" />
-        <p :class="toggleClass" :style="{backgroundColor: inputStyle}">Style me inline! {{ inputStyle }}
-        </p>
+    <section id="user-goals">
+        <h2>My course goals</h2>
+        <input type="text" v-model="enteredGoal" />
+        <button @click="addGoal">Add Goal</button>
+        <!-- <p v-show="goals.length === 0">No goals have been added yet - please start adding some!</p> -->
+        <p v-if="goals.length === 0">No goals have been added yet - please start adding some!</p>
+        <ul v-else>
+            <!-- <ul v-if="goals.length > 0"> -->
+            <li>Goal {{ goals }}</li>
+        </ul>
     </section>
 </body>
 
