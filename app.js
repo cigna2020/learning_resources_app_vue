@@ -1,29 +1,23 @@
+function getRandomValue(min, max) {
+    return Math.floor(Math.random() * (max - min) + min)
+};
+
 const app = Vue.createApp({
     data() {
         return {
-            tasks: [],
-            newTask: '',
-            show: true,
-            buttonText: '',
+            playerHealth: 100,
+            monsterHealth: 100
         }
     },
     methods: {
-        addTask() {
-            this.tasks.push(this.newTask);
-            this.newButtonText();
+        attackMonster() {
+            this.monsterHealth -= getRandomValue(5, 8);
+            this.attackPlayer();
         },
-        toggleList() {
-            this.show = !this.show;
-            this.newButtonText();
-        },
-        newButtonText() {
-            if (this.show) {
-                this.buttonText = 'Hide';
-            } else {
-                this.buttonText = 'Show List';
-            }
+        attackPlayer() {
+            this.playerHealth -= getRandomValue(8, 15);
         }
     }
 });
 
-app.mount('#assignment');
+app.mount('#game');
