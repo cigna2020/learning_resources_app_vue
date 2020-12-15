@@ -9,20 +9,34 @@ const app = Vue.createApp({
             monsterHealth: 100,
             countAttack: 0,
             winner: null,
+            logMessage: [],
         }
     },
     methods: {
+        startNewGame() {
+            this.playerHealth = 100;
+            this.monsterHealth = 100;
+            this.countAttack = 0;
+            this.winner = null;
+            this.logMessage = [];
+        },
         attackMonster() {
             this.countAttack++;
-            this.monsterHealth -= getRandomValue(5, 8);
+            const valueAttack = getRandomValue(5, 8);
+            this.monsterHealth -= valueAttack;
+            this.addLogMessage('Player', 'attack', valueAttack);
             this.attackPlayer();
         },
         attackPlayer() {
-            this.playerHealth -= getRandomValue(8, 15);
+            const valueAttack = getRandomValue(8, 15);
+            this.playerHealth -= valueAttack;
+            this.addLogMessage('Monster', 'attack', valueAttack);
         },
         specialAttack() {
             this.countAttack++;
-            this.monsterHealth -= getRandomValue(10, 25);
+            const valueAttack = getRandomValue(10, 25);
+            this.monsterHealth -= valueAttack;
+            this.addLogMessage('Player', 'special-attack', valueAttack);
             this.attackPlayer();
         },
         healPlayer() {
@@ -33,14 +47,31 @@ const app = Vue.createApp({
             } else {
                 this.playerHealth += healValue;
             }
+            this.addLogMessage('Player', 'heal', healValue);
             this.attackPlayer();
+        },
+        surrender() {
+            this.winner = 'monster';
+        },
+        addLogMessage(who, what, value) {
+            this.logMessage.unshift({
+                actionBy: who,
+                actionType: what,
+                actionValue: value
+            });
         }
     },
     computed: {
         monsterBarStyles() {
+            if (this.monsterHealth < 0) {
+                return {width: '0%'}
+            }
             return {width: this.monsterHealth + '%'};
         },
         playerBarStyles() {
+            if (this.playerHealth < 0) {
+                return {width: '0%'}
+            }
             return {width: this.playerHealth + '%'};
         },
         mayUseSpecialAttack() {
