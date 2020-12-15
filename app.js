@@ -8,6 +8,7 @@ const app = Vue.createApp({
             playerHealth: 100,
             monsterHealth: 100,
             countAttack: 0,
+            winner: null,
         }
     },
     methods: {
@@ -34,7 +35,6 @@ const app = Vue.createApp({
             }
             this.attackPlayer();
         }
-
     },
     computed: {
         monsterBarStyles() {
@@ -46,7 +46,22 @@ const app = Vue.createApp({
         mayUseSpecialAttack() {
             return this.countAttack % 3 !== 0;
         }
-
+    },
+    watch: {
+        playerHealth() {
+            if (this.playerHealth <= 0 && this.monsterHealth <= 0) {
+                this.winner = 'draw'
+            } else if (this.playerHealth <= 0) {
+                this.winner = 'monster'
+            }
+        },
+        monsterHealth() {
+            if (this.monsterHealth <= 0 && this.playerHealth <= 0) {
+                this.winner = 'draw'
+            } else if (this.monsterHealth <= 0) {
+                this.winner = 'player'
+            }
+        }
     }
 });
 
