@@ -13,45 +13,20 @@
 
 <body>
     <header>
-        <h1>Monster Slayer</h1>
+        <h1>FriendList</h1>
     </header>
-    <div id="game">
-        <section id="monster" class="container">
-            <h2 @click="attackMonster">Monster Health: {{monsterHealth}}</h2>
-            <div class="healthbar">
-                <!-- <div class="healthbar__value" :style="{width: monsterHealth + '%'}"></div> -->
-                <div class="healthbar__value" :style="monsterBarStyles"></div>
-            </div>
-        </section>
-        <section id="player" class="container">
-            <h2>Your Health: {{playerHealth}}</h2>
-            <div class="healthbar">
-                <!-- <div class="healthbar__value" :style="{width: playerHealth + '%'}"></div> -->
-                <div class="healthbar__value" :style="playerBarStyles"></div>
-            </div>
-        </section>
-        <section class="container" v-if="winner">
-            <h2>Game over!</h2>
-            <h3 v-if="winner === 'monster'">You lost!</h3>
-            <h3 v-if="winner === 'player'">You won!</h3>
-            <h3 v-if="winner === 'draw'">It's a draw!</h3>
-            <button @click="startNewGame">Start new game!</button>
-        </section>
-        <section id="controls" v-else>
-            <button @click="attackMonster">ATTACK</button>
-            <button :disabled="mayUseSpecialAttack" @click="specialAttack">SPECIAL ATTACK</button>
-            <button @click="healPlayer">HEAL</button>
-            <button @click="surrender">SURRENDER</button>
-        </section>
-        <section id="log" class="container">
-            <h2>Battle Log</h2>
-            <ul>
-                <li v-for="message in logMessage">
-                    {{message.actionBy}} - {{message.actionType}} - {{message.actionValue}}
-                </li>
-            </ul>
-        </section>
-    </div>
+    <section id="app">
+        <ul>
+            <li v-for="freand in freands" :key="freand.id">
+                <h2>{{freand.name}}</h2>
+                <button @click="toggleDetails">Show Details</button>
+                <ul v-if="detailsAreVisible">
+                    <li><strong>Phone:</strong> {{freand.phone}}</li>
+                    <li><strong>Email:</strong> {{freand.email}}</li>
+                </ul>
+            </li>
+        </ul>
+    </section>
 </body>
 
 </html>
