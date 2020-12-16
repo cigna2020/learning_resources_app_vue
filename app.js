@@ -2,7 +2,7 @@ const app = Vue.createApp({
     data() {
         return {
             detailsAreVisible: false,
-            freands: [
+            friends: [
                 {
                     id: 'manuel',
                     name: 'Manuel Lorenz',
