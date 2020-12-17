@@ -3,16 +3,12 @@
     <header><h1>My Friends</h1></header>
     <ul>
       <friend-contact
-        name="Manuel Lorenz"
-        phone-number="0987 56712"
-        email-address="lorenz@example.com"
-        is-favorite="1"
-      ></friend-contact>
-      <friend-contact
-        name="Julie Jones"
-        phone-number="1234 56789"
-        email-address="julie@example.com"
-        is-favorite="0"
+        v-for="friend in friends"
+        :key="friend.id"
+        :name="friend.name"
+        :phone-number="friend.phone"
+        :email-address="friend.email"
+        :is-favorite="friend.favorite"
       ></friend-contact>
     </ul>
   </section>
@@ -30,12 +26,14 @@ export default {
           name: "Manuel Lorenz",
           phone: "0123 45678 90",
           email: "manuel@localhost.com",
+          favorite: true,
         },
         {
           id: "julie",
           name: "Julie Joenz",
           phone: "0987 45678 21",
           email: "julie@localhost.com",
+          favorite: false,
         },
       ],
     };
@@ -98,6 +96,7 @@ header {
   background-color: #ff0077;
   color: white;
   padding: 0.05rem 1rem;
+  margin-right: 1rem;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.26);
 }
 
