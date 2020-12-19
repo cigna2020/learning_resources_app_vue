@@ -1,14 +1,23 @@
 <template>
   <div>
-    <header>
-      <slot name="header"></slot>
+    <!-- v-if - что-бы в html не отображался пустой header если header underfind -->
+    <!-- но в этом случае дефолтное значение тоже не будет отображено -->
+    <header v-if="$slots.header">
+      <slot name="header">
+        <!-- Будет отображено только в случае, если компонент не имеет своего контента -->
+        <h2>The Default Text</h2>
+      </slot>
     </header>
     <slot></slot>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  mounted() {
+    console.log(this.$slots.header);
+  },
+};
 </script>
 
 <style scoped>
