@@ -2,11 +2,13 @@
   <h2>Manage Goals</h2>
   <input type="text" placeholder="Your text here..." ref="goal" />
   <button @click="setGoal">Confirm!</button>
-  <error-alert v-if="inputIsValid">
-    <h2>The input shouldn't be empty!</h2>
-    <p>Please enter some text...</p>
-    <button @click="confirmError">Ok</button>
-  </error-alert>
+  <teleport to="body">
+    <error-alert v-if="inputIsValid">
+      <h2>The input shouldn't be empty!</h2>
+      <p>Please enter some text...</p>
+      <button @click="confirmError">Ok</button>
+    </error-alert>
+  </teleport>
 </template>
 
 <script>
