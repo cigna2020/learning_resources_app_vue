@@ -1,4 +1,16 @@
 <template>
+  <BaseDialog v-if="inputIsInvalid" title="Invalid Input" @close="confirmError">
+    <template v-slot:default>
+      <p>Unfortunately, at least one input value is invalid</p>
+      <p>
+        Please check all inputs and make sure you enter at least a few
+        characters into each input field.
+      </p>
+    </template>
+    <template v-slot:action>
+      <BaseButton @click="confirmError">Okay</BaseButton>
+    </template>
+  </BaseDialog>
   <BaseCard>
     <form @submit.prevent="submitData">
       <div class="form-control">
@@ -25,14 +37,30 @@
 
 <script>
 export default {
+  data() {
+    return {
+      inputIsInvalid: false
+    };
+  },
   inject: ['addResource'],
   methods: {
     submitData() {
       const enteredTitle = this.$refs.titleInput.value;
       const enteredDescription = this.$refs.descrInput.value;
       const enteredUrl = this.$refs.linkInput.value;
-
+      // trim(), удаляет пробелы в начале и/или в конце
+      if (
+        enteredTitle.trim() === '' ||
+        enteredDescription.trim() === '' ||
+        enteredUrl === ''
+      ) {
+        this.inputIsInvalid = true;
+        return;
+      }
       this.addResource(enteredTitle, enteredDescription, enteredUrl);
+    },
+    confirmError() {
+      this.inputIsInvalid = false;
     }
   }
 };
