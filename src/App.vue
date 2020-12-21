@@ -1,70 +1,39 @@
 <template>
-  <div>
-    <TheHeader></TheHeader>
-    <BadgeList></BadgeList>
-    <UserInfo
-      :full-name="activeUser.name"
-      :info-text="activeUser.description"
-      :role="activeUser.role"
-    ></UserInfo>
-    <CourseGoals>
-      <template>
-        <!-- <template #default="slotProps"> -->
-        <!-- <h2>{{ slotProps.item }}</h2>
-        <p>{{ slotProps["some-goals"] }}</p> -->
-      </template>
-    </CourseGoals>
-    <button @click="selectedComponent('manage-goals')">Manage Goals</button>
-    <button @click="selectedComponent('active-goals')">Active Goals</button>
-    <!-- <manage-goals v-if="statusComponent === 'manage-goals'"></manage-goals>
-    <active-goals v-if="statusComponent === 'active-goals'"></active-goals> -->
-    <keep-alive>
-      <component v-bind:is="statusComponent"></component>
-    </keep-alive>
-  </div>
+  <ul>
+    <LearningResource
+      v-for="res in storedResources"
+      :key="res.id"
+      :title="res.title"
+      :description="res.description"
+      :link="res.link"
+    ></LearningResource>
+  </ul>
 </template>
 
 <script>
-import TheHeader from "./components/TheHeader.vue";
-import BadgeList from "./components/BadgeList.vue";
-import UserInfo from "./components/UserInfo.vue";
-import CourseGoals from "./components/CourseGoals.vue";
-import ManageGoals from "./components/ManageGoals";
-import ActiveGoals from "./components/ActiveGoals.vue";
+import LearningResource from './components/learning-resources/LearningResource';
 
 export default {
   components: {
-    TheHeader,
-    BadgeList,
-    UserInfo,
-    CourseGoals,
-    ManageGoals,
-    ActiveGoals,
+    LearningResource
   },
   data() {
     return {
-      activeUser: {
-        name: "Maximilian Schwarzmüller",
-        description: "Site owner and admin",
-        role: "admin",
-      },
-      statusComponent: "active-goals",
+      storedResources: [
+        {
+          id: 'official-guide',
+          title: 'Official Guide',
+          description: 'The official Vue.js documentation',
+          link: 'https://vuejs.org'
+        },
+        {
+          id: 'google',
+          title: 'Google',
+          description: 'Learn to google...',
+          link: 'https://google.com'
+        }
+      ]
     };
-  },
-  methods: {
-    selectedComponent(comp) {
-      this.statusComponent = comp;
-    },
-  },
+  }
 };
 </script>
-
-<style>
-html {
-  font-family: sans-serif;
-}
-
-body {
-  margin: 0;
-}
-</style>
